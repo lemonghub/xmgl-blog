@@ -4,7 +4,7 @@
 	
 	<classPathEntry location="D:\maven\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar" />
 	
-  <context id="ssaeb" targetRuntime="MyBatis3">
+  <context id="xmgl" targetRuntime="MyBatis3">
   
   	<commentGenerator>
     	<!-- 抑制警告 -->
@@ -23,7 +23,7 @@
     
     <javaClientGenerator targetPackage="com.xmgl.blog.dao" targetProject="src/main/java" type="XMLMAPPER" />
 
-      <table tableName="tb_tag" domainObjectName="Tag"
+      <table tableName="tb_comment_reply" domainObjectName="CommentReply"
              enableCountByExample="false" enableUpdateByExample="false"
              enableDeleteByExample="false" enableSelectByExample="false"
              selectByExampleQueryId="false">
