@@ -1,7 +1,11 @@
 package com.xmgl.blog.dao;
 
 import com.xmgl.blog.entity.Tag;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Mapper
+@Repository
 public interface TagMapper {
     int deleteByPrimaryKey(Integer tagId);
 
