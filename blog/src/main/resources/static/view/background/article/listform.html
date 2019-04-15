@@ -57,29 +57,6 @@
 
   <script src="./../layuiadmin/layui/layui.js"></script>
   <script>
-  layui.config({
-    base: '../../../layuiadmin/' //静态资源所在路径
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use(['index', 'form'], function(){
-    var $ = layui.$
-    ,form = layui.form;
-
-
-    //监听提交
-    form.on('submit(layuiadmin-app-form-submit)', function(data){
-      var field = data.field; //获取提交的字段
-      var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引  
-
-        console.log(field);
-      //提交 Ajax 成功后，关闭当前弹层并重载表格
-      //$.ajax({});
-      parent.layui.table.reload('LAY-app-content-list'); //重载表格
-      parent.layer.close(index); //再执行关闭 
-    });
-  })
-  </script>
-  <script>
       layui.use(['layedit', 'layer', 'jquery'], function () {
           var $ = layui.jquery
               , layer = layui.layer
@@ -165,7 +142,13 @@
           });
           var ieditor = layedit.build('content');
           //设置编辑器内容
-          layedit.setContent(ieditor, "<h1>hello layedit</h1>", false);
+          // layedit.setContent(ieditor, "<h1>hello layedit</h1>", false);
+          if(sessionStorage.getItem('content')!= "null"  ) {
+              console.log(sessionStorage.getItem('content'));
+              layedit.setContent(ieditor, sessionStorage.getItem('content', false));
+          }else{
+              layedit.setContent(ieditor, "<h1>在这里写入你的文章</h1>", false);
+          }
           $("#openlayer").click(function () {
               layer.open({
                   type: 2,
@@ -181,22 +164,46 @@
       })
   </script>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "/blog/category/listAll",
-            contentType: 'application/json; charset=UTF-8',
-            dataType: 'json',
-            type: 'post',
-            success: function (data) {
-                console.log(data);
-                $.each(data, function (index, item) {
-                    $('#category').append(new Option(item.categoryName, item.categoryId));// 下拉菜单里添加元素
-                });
-                layui.form.render("select");//重新渲染 固定写法
-            }
-        });
+  <script>
+      $(document).ready(function () {
+          $.ajax({
+              url: "/blog/category/listAll",
+              contentType: 'application/json; charset=UTF-8',
+              dataType: 'json',
+              type: 'post',
+              success: function (data) {
+                  console.log(data);
+                  $.each(data, function (index, item) {
+                      $('#category').append(new Option(item.categoryName, item.categoryId));// 下拉菜单里添加元素
+                  });
+                  layui.form.render("select");//重新渲染 固定写法
+              }
+          });
+      });
+  </script>
+  <script>
+  layui.config({
+    base: '../../../layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form'], function(){
+    var $ = layui.$
+    ,form = layui.form;
+
+
+    //监听提交
+    form.on('submit(layuiadmin-app-form-submit)', function(data){
+      var field = data.field; //获取提交的字段
+      var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引  
+
+        console.log(field);
+      //提交 Ajax 成功后，关闭当前弹层并重载表格
+      //$.ajax({});
+      parent.layui.table.reload('LAY-app-content-list'); //重载表格
+      parent.layer.close(index); //再执行关闭 
     });
-</script>
+  })
+  </script>
+
 </body>
 </html>

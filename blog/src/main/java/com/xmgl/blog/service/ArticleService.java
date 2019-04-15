@@ -29,5 +29,19 @@ public interface ArticleService {
      */
     ServerResponse deleteArticleById(List<ArticleModel> articles);
 
+    /**
+     * 插入文章
+     * @param article
+     * @return
+     */
     ServerResponse insertArticle(Article article);
+
+    /**
+     * 查找文章ById
+     * @param articleId
+     * @return
+     */
+    Article selectArticleById(Integer articleId);
+
+    ServerResponse updateArticle(Article article);
 }

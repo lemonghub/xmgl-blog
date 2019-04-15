@@ -157,7 +157,6 @@
           ,yes: function(index, layero){
             //点击确认触发 iframe 内容中的按钮提交
             var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-list");
-                var newsFrom = layer.getChildFrame('#layuiadmin-app-form-list', index);
                 var title = submit.find('input[name="title"]').val();//标题
                 var instruction = submit.find('textarea[name="instruction"]').val();//简介
                 var iframe = submit.find('iframe[name="LAY_layedit_1"]');
@@ -228,30 +227,73 @@
           } else if(obj.event === 'edit'){
               layer.open({
                   type: 2
-                  ,title: '编辑类别'
-                  ,content: 'categorysform.html'
-                  ,area: ['450px', '200px']
+                  ,title: '编辑文章'
+                  ,content: 'listform.html'
+                  ,area: ['550px', '550px']
                   ,btn: ['确定', '取消']
                   ,success:function (layero, index) {
-                      var body = layui.layer.getChildFrame('body', index);
-                      body.find(".categoryName").val(data.categoryName);
-                  }
-                  ,yes: function(index, layero){
-                      var othis = layero.find('iframe').contents().find("#layuiadmin-app-form-tags")
-                      var categorise = othis.find('input[name="categorise"]').val();
-                      if(!categorise.replace(/\s/g, '')) return;
-
-
-                      //ajax提交
+                      var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-list");
                       $.ajax({
                           type: "POST",
                           dataType: "json",
-                          url: "/blog/category/update",
+                          url: "/blog/article/toEdit",
                           async: false,
                           contentType: 'application/json; charset=UTF-8',
                           data: JSON.stringify({
-                              'categoryName': categorise,
-                              'categoryId':data.categoryId
+                              'articleId':data.articleId
+                          }),
+                          success: function(result) {
+                              var article = result.data.article;
+                              var categoryList = result.data.categoryList;
+
+                              submit.find('input[name="title"]').val(article.title);//标题
+                              submit.find('textarea[name="instruction"]').val(article.introduction);//简介
+                              var iframe = submit.find('iframe[name="LAY_layedit_1"]');
+                              iframe.contents().find("body").html(article.content);//内容
+                              sessionStorage.setItem('content',article.content);
+                              // if(article.postStatus==0){
+                              //     submit.find('input[name="postStatus"]').prop("checked", false);
+                              // }else{
+                              //     submit.find('input[name="postStatus"]').prop("checked", true);
+                              // }
+                              // var postStatus = submit.find('input[name="postStatus"]').is(':checked');//false：待修改，true：发布
+                              // var categoryId = submit.find('select[name="categoryId"]').val();//类别
+                          },
+                          error: function() {
+                              layer.msg('获取文章失败！', {time:500});
+                          }
+                      });
+                  }
+                  ,yes: function(index, layero){
+                      var submit = layero.find('iframe').contents().find("#layuiadmin-app-form-list");
+                      var title = submit.find('input[name="title"]').val();//标题
+                      var instruction = submit.find('textarea[name="instruction"]').val();//简介
+                      var iframe = submit.find('iframe[name="LAY_layedit_1"]');
+                      var content = iframe.contents().find("body").html();//内容
+                      var postStatus = submit.find('input[name="postStatus"]').is(':checked');//false：待修改，true：发布
+                      var categoryId = submit.find('select[name="categoryId"]').val();//类别
+                      console.log(postStatus);
+                      if(postStatus==true){
+                          postStatus =1;
+                      }else{
+                          postStatus =0;
+                      }
+                      console.log(postStatus);
+                      $.ajax({
+                          type: "POST",
+                          dataType: "json",
+                          url: "/blog/article/edit",
+                          async: false,
+                          contentType: 'application/json; charset=UTF-8',
+                          data: JSON.stringify({
+                              "article":{
+                                  "articleId":data.articleId,
+                                  "title":title,
+                                  "introduction":instruction,
+                                  "content":content,
+                                  "postStatus":postStatus,
+                                  "categoryId":categoryId
+                              }
                           }),
                           success: function(result) {
                               layer.msg('更新成功！', {time:500});
@@ -260,9 +302,9 @@
                               layer.msg('更新失败！', {time:500});
                           }
                       });
-                      table.reload('test-table-operate');
+                      // submit.click();
+                      table.reload('LAY-app-content-list');
                       layer.close(index);
-
                   }
 
               });

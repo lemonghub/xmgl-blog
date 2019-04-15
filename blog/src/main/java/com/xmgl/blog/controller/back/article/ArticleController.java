@@ -1,8 +1,11 @@
 package com.xmgl.blog.controller.back.article;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xmgl.blog.entity.Article;
+import com.xmgl.blog.entity.Category;
 import com.xmgl.blog.model.ArticleModel;
 import com.xmgl.blog.service.ArticleService;
+import com.xmgl.blog.service.CategoryService;
 import com.xmgl.blog.util.ObjectMapperUtil;
 import com.xmgl.blog.util.Result;
 import com.xmgl.blog.util.ServerResponse;
@@ -26,6 +29,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @PostMapping("list")
     @ResponseBody
@@ -57,6 +63,38 @@ public class ArticleController {
             Article article = ObjectMapperUtil.convertObj(json,Article.class);
             article.setCreateAt(new Date());
             articleService.insertArticle(article);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ServerResponse.createByFailure(e.getMessage());
+        }
+        return ServerResponse.createBySuccess();
+    }
+
+    @PostMapping("toEdit")
+    @ResponseBody
+    private ServerResponse showEditArticle(@RequestBody Map<String,Object> map){
+        try{
+            Integer articleId = (int)map.get("articleId");
+            Article article = articleService.selectArticleById(articleId);
+            List<Category> categories = categoryService.selectCategoryListAll();
+            JSONObject jo = new JSONObject();
+            jo.put("article", article);
+            jo.put("categoryList",categories);
+            return ServerResponse.createBySuccess(jo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ServerResponse.createByFailure(e.getMessage());
+        }
+    }
+
+    @PostMapping("edit")
+    @ResponseBody
+    private ServerResponse editArticle(@RequestBody Map<String,Object> map){
+        try{
+            String json = ObjectMapperUtil.objectToString(map.get("article"));
+            Article article = ObjectMapperUtil.convertObj(json,Article.class);
+            article.setUpdateAt(new Date());
+            articleService.updateArticle(article);
         }catch (Exception e){
             e.printStackTrace();
             return ServerResponse.createByFailure(e.getMessage());

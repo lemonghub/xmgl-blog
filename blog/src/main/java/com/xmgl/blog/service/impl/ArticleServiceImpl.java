@@ -43,4 +43,15 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.insertSelective(article);
         return ServerResponse.createBySuccess();
     }
+
+    @Override
+    public Article selectArticleById(Integer articleId) {
+        return articleMapper.selectByPrimaryKey(articleId);
+    }
+
+    @Override
+    public ServerResponse updateArticle(Article article) {
+        articleMapper.updateByPrimaryKeySelective(article);
+        return ServerResponse.createBySuccess();
+    }
 }
