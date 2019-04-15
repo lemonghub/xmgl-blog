@@ -24,6 +24,10 @@
     </where>
     LIMIT #{start}, #{limit}
   </select>
+  <select id="selectCategoryList" resultMap="BaseResultMap">
+    SELECT *
+    FROM tb_category
+  </select>
   <select id="selectCategoryListCount" resultType="java.lang.Integer">
     SELECT COUNT(*)
     FROM tb_category

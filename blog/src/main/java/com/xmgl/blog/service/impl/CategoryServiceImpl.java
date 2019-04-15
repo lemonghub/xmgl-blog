@@ -50,4 +50,9 @@ public class CategoryServiceImpl implements CategoryService {
         categoryMapper.updateByPrimaryKeySelective(category);
         return ServerResponse.createBySuccess();
     }
+
+    @Override
+    public List<Category> selectCategoryListAll() {
+        return categoryMapper.selectCategoryList();
+    }
 }
