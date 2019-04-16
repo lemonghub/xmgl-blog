@@ -32,9 +32,8 @@
   </select>
   <select id="selectArticleByPager" resultType="com.xmgl.blog.model.ArticleModel">
     SELECT *
-    FROM tb_article a,tb_category c
+    FROM tb_article a left join tb_category c on a.category_id=c.category_id
     <where>
-      a.category_id = c.category_id
       <if test="title != null">
         AND title LIKE '%${title}%'
       </if>
@@ -43,9 +42,8 @@
   </select>
   <select id="selectArticleListCount" resultType="java.lang.Integer">
     SELECT COUNT(*)
-    FROM tb_article a,tb_category c
+    FROM tb_article a left join tb_category c on a.category_id=c.category_id
     <where>
-      a.category_id = c.category_id
       <if test="title != null">
         AND title LIKE '%${title}%'
       </if>

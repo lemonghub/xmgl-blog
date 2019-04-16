@@ -176,7 +176,7 @@
                   $.each(data, function (index, item) {
                       $('#category').append(new Option(item.categoryName, item.categoryId));// 下拉菜单里添加元素
                   });
-                  // layui.form.render("select");//重新渲染 固定写法
+                 f();//重新渲染 固定写法
               }
           });
       });
