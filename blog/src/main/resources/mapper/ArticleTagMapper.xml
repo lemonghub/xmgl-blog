@@ -28,4 +28,17 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertArticleTagList" parameterType="java.util.List">
+    insert into tb_article_tag (article_id, tag_id)
+    VALUES
+    <foreach collection ="list" item="item" separator =",">
+      (#{item.articleId}, #{item.tagId})
+    </foreach >
+  </insert>
+  <select id="selectByArticleId" parameterType="java.lang.Integer" resultType="com.xmgl.blog.entity.ArticleTag">
+    select * from tb_article_tag where article_id = #{articleId}
+  </select>
+  <delete id="deleteByArticleId" parameterType="java.lang.Integer">
+    delete from tb_article_tag where article_id = #{articleId}
+  </delete>
 </mapper>

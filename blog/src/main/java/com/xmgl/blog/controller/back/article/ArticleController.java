@@ -2,6 +2,7 @@ package com.xmgl.blog.controller.back.article;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xmgl.blog.entity.Article;
+import com.xmgl.blog.entity.ArticleTag;
 import com.xmgl.blog.entity.Category;
 import com.xmgl.blog.model.ArticleModel;
 import com.xmgl.blog.service.ArticleService;
@@ -59,10 +60,12 @@ public class ArticleController {
     @ResponseBody
     private ServerResponse addArticle(@RequestBody Map<String,Object> map){
         try{
+            String tags = ObjectMapperUtil.objectToString(map.get("tags"));
+            List<ArticleTag> articleTags = ObjectMapperUtil.convertList(tags,ArticleTag.class);
             String json = ObjectMapperUtil.objectToString(map.get("article"));
             Article article = ObjectMapperUtil.convertObj(json,Article.class);
             article.setCreateAt(new Date());
-            articleService.insertArticle(article);
+            articleService.insertArticle(article,articleTags);
         }catch (Exception e){
             e.printStackTrace();
             return ServerResponse.createByFailure(e.getMessage());
@@ -77,9 +80,11 @@ public class ArticleController {
             Integer articleId = (int)map.get("articleId");
             Article article = articleService.selectArticleById(articleId);
             List<Category> categories = categoryService.selectCategoryListAll();
+            List<ArticleTag> articleTags = articleService.selectTagByArticleId(articleId);
             JSONObject jo = new JSONObject();
             jo.put("article", article);
             jo.put("categoryList",categories);
+            jo.put("tagList",articleTags);
             return ServerResponse.createBySuccess(jo);
         }catch (Exception e){
             e.printStackTrace();
@@ -91,10 +96,12 @@ public class ArticleController {
     @ResponseBody
     private ServerResponse editArticle(@RequestBody Map<String,Object> map){
         try{
+            String tags = ObjectMapperUtil.objectToString(map.get("tags"));
+            List<ArticleTag> articleTags = ObjectMapperUtil.convertList(tags,ArticleTag.class);
             String json = ObjectMapperUtil.objectToString(map.get("article"));
             Article article = ObjectMapperUtil.convertObj(json,Article.class);
             article.setUpdateAt(new Date());
-            articleService.updateArticle(article);
+            articleService.updateArticle(article,articleTags);
         }catch (Exception e){
             e.printStackTrace();
             return ServerResponse.createByFailure(e.getMessage());

@@ -41,4 +41,6 @@ public interface TagService {
      * @return
      */
     ServerResponse updateTag(Tag tag);
+
+    List<Tag> selectTagAll();
 }

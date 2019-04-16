@@ -25,4 +25,6 @@ public interface TagMapper {
     List<Tag> selectTagByPager(@Param("tagName") String tagName, @Param("start") int start, @Param("limit") int limit);
 
     int selectTagListCount(@Param("tagName") String tagName);
+
+    List<Tag> selectTagList();
 }

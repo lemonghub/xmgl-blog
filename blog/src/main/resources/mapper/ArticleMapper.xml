@@ -38,6 +38,7 @@
         AND title LIKE '%${title}%'
       </if>
     </where>
+    ORDER By a.article_id
     LIMIT #{start}, #{limit}
   </select>
   <select id="selectArticleListCount" resultType="java.lang.Integer">
@@ -70,7 +71,7 @@
       #{postStatus,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP},
       #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xmgl.blog.entity.Article" >
+  <insert id="insertSelective" parameterType="com.xmgl.blog.entity.Article" useGeneratedKeys="true" keyProperty="articleId">
     insert into tb_article
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="articleId != null" >

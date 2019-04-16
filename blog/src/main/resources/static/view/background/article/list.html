@@ -169,6 +169,16 @@
                 }else{
                     postStatus =0;
                 }
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                var tags = iframeWin.getTags();
+                tags.forEach(function(value, index) {
+                    value.tagId = value.value;
+                    delete value.name;
+                    delete value.disabled;
+                    delete value.value;
+                    console.log('value=', value, 'index=', index);
+
+                });
                 $.ajax({
                     type: "POST",
                     dataType: "json",
@@ -182,20 +192,24 @@
                             "content":content,
                             "postStatus":postStatus,
                             "categoryId":categoryId
-                        }
+                        },
+                        "tags":tags
                     }),
                     success: function(result) {
+
                         layer.msg('保存成功！', {time:500});
                     },
                     error: function() {
                         layer.msg('保存失败！', {time:500});
                     }
                 });
+
             // submit.click();
                 table.reload('LAY-app-content-list');
                 layer.close(index);
           }
-        }); 
+        });
+          sessionStorage.setItem('content','<h1>在这里写入你的文章</h1>');
       }
     };
 
@@ -246,6 +260,11 @@
                           success: function(result) {
                               var article = result.data.article;
                               var categoryList = result.data.categoryList;
+                              var tagList = result.data.tagList;
+                              var tags = [];
+                              tagList.forEach(function (value,i) {
+                                  tags.push(value.tagId);
+                              });
 
                               submit.find('input[name="title"]').val(article.title);//标题
                               submit.find('textarea[name="instruction"]').val(article.introduction);//简介
@@ -261,6 +280,8 @@
                               submit.find('select[name="categoryId"]').find('option[value='+article.categoryId+']').attr("selected",true);
                               var iframeWin = window[layero.find('iframe')[0]['name']];
                               iframeWin.f();
+                              iframeWin.setTags(tags);
+
                           },
                           error: function() {
                               layer.msg('获取文章失败！', {time:500});
@@ -282,6 +303,16 @@
                           postStatus =0;
                       }
                       console.log(postStatus);
+                      var iframeWin = window[layero.find('iframe')[0]['name']];
+                      var tags = iframeWin.getTags();
+                      tags.forEach(function(value, index) {
+                          value.tagId = value.value;
+                          delete value.name;
+                          delete value.disabled;
+                          delete value.value;
+                          console.log('value=', value, 'index=', index);
+
+                      });
                       $.ajax({
                           type: "POST",
                           dataType: "json",
@@ -296,7 +327,8 @@
                                   "content":content,
                                   "postStatus":postStatus,
                                   "categoryId":categoryId
-                              }
+                              },
+                              "tags":tags
                           }),
                           success: function(result) {
                               layer.msg('更新成功！', {time:500});

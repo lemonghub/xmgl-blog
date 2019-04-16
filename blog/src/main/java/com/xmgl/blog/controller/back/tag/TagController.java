@@ -58,4 +58,10 @@ public class TagController {
         tagService.updateTag(tag);
         return ServerResponse.createBySuccess();
     }
+
+    @PostMapping("listAll")
+    @ResponseBody
+    private List<Tag> getTagListAll(){
+        return tagService.selectTagAll();
+    }
 }

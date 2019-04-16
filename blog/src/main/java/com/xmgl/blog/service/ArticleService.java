@@ -1,6 +1,7 @@
 package com.xmgl.blog.service;
 
 import com.xmgl.blog.entity.Article;
+import com.xmgl.blog.entity.ArticleTag;
 import com.xmgl.blog.model.ArticleModel;
 import com.xmgl.blog.util.Result;
 import com.xmgl.blog.util.ServerResponse;
@@ -34,7 +35,7 @@ public interface ArticleService {
      * @param article
      * @return
      */
-    ServerResponse insertArticle(Article article);
+    ServerResponse insertArticle(Article article,List<ArticleTag> articleTags);
 
     /**
      * 查找文章ById
@@ -43,5 +44,24 @@ public interface ArticleService {
      */
     Article selectArticleById(Integer articleId);
 
-    ServerResponse updateArticle(Article article);
+    /**
+     * 更新文章
+     * @param article
+     * @return
+     */
+    ServerResponse updateArticle(Article article,List<ArticleTag> articleTags);
+
+    /**
+     * 增加文章标签
+     * @param articleTags
+     * @return
+     */
+    ServerResponse insertArticleTag(List<ArticleTag> articleTags);
+
+    /**
+     * 查找文章标签
+     * @param articleId
+     * @return
+     */
+    List<ArticleTag> selectTagByArticleId(int articleId);
 }

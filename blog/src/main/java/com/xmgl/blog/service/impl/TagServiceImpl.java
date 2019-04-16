@@ -50,4 +50,9 @@ public class TagServiceImpl implements TagService {
         tagMapper.updateByPrimaryKeySelective(tag);
         return ServerResponse.createBySuccess();
     }
+
+    @Override
+    public List<Tag> selectTagAll() {
+        return tagMapper.selectTagList();
+    }
 }

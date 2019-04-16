@@ -1,7 +1,9 @@
 package com.xmgl.blog.service.impl;
 
 import com.xmgl.blog.dao.ArticleMapper;
+import com.xmgl.blog.dao.ArticleTagMapper;
 import com.xmgl.blog.entity.Article;
+import com.xmgl.blog.entity.ArticleTag;
 import com.xmgl.blog.model.ArticleModel;
 import com.xmgl.blog.service.ArticleService;
 import com.xmgl.blog.util.PageCalculator;
@@ -22,6 +24,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
 
+    @Autowired
+    private ArticleTagMapper articleTagMapper;
+
     @Override
     public Result<List<ArticleModel>> selectArticleList(String title, int page, int limit) {
         page = PageCalculator.checkPage(page);
@@ -35,12 +40,21 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ServerResponse deleteArticleById(List<ArticleModel> articles) {
         articleMapper.deleteArticleById(articles);
+        for(ArticleModel articleModel:articles){
+            articleTagMapper.deleteByArticleId(articleModel.getArticleId());
+        }
         return ServerResponse.createBySuccess();
     }
 
     @Override
-    public ServerResponse insertArticle(Article article) {
+    public ServerResponse insertArticle(Article article,List<ArticleTag> articleTags) {
         articleMapper.insertSelective(article);
+        if(articleTags.size()!=0) {
+            for (ArticleTag articleTag : articleTags) {
+                articleTag.setArticleId(article.getArticleId());
+            }
+            articleTagMapper.insertArticleTagList(articleTags);
+        }
         return ServerResponse.createBySuccess();
     }
 
@@ -50,8 +64,26 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ServerResponse updateArticle(Article article) {
+    public ServerResponse updateArticle(Article article ,List<ArticleTag> articleTags) {
+        articleTagMapper.deleteByArticleId(article.getArticleId());
+        if(articleTags.size()!=0) {
+            for (ArticleTag articleTag : articleTags) {
+                articleTag.setArticleId(article.getArticleId());
+            }
+            articleTagMapper.insertArticleTagList(articleTags);
+        }
         articleMapper.updateByPrimaryKeySelective(article);
         return ServerResponse.createBySuccess();
+    }
+
+    @Override
+    public ServerResponse insertArticleTag(List<ArticleTag> articleTags) {
+        articleTagMapper.insertArticleTagList(articleTags);
+        return ServerResponse.createBySuccess();
+    }
+
+    @Override
+    public List<ArticleTag> selectTagByArticleId(int articleId) {
+        return articleTagMapper.selectByArticleId(articleId);
     }
 }

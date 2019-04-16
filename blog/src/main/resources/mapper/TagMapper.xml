@@ -33,6 +33,10 @@
       </if>
     </where>
   </select>
+  <select id="selectTagList" resultType="com.xmgl.blog.entity.Tag">
+    SELECT *
+    FROM tb_tag
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_tag
     where tag_id = #{tagId,jdbcType=INTEGER}
