@@ -176,10 +176,17 @@
                   $.each(data, function (index, item) {
                       $('#category').append(new Option(item.categoryName, item.categoryId));// 下拉菜单里添加元素
                   });
-                  layui.form.render("select");//重新渲染 固定写法
+                  // layui.form.render("select");//重新渲染 固定写法
               }
           });
       });
+      function f() {
+          layui.use('form', function() {
+              var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+              form.render();
+          });
+      }
+
   </script>
   <script>
   layui.config({
@@ -202,6 +209,8 @@
       parent.layui.table.reload('LAY-app-content-list'); //重载表格
       parent.layer.close(index); //再执行关闭 
     });
+
+
   })
   </script>
 
