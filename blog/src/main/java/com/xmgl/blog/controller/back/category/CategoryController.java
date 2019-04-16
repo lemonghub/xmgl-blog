@@ -24,28 +24,28 @@ public class CategoryController {
 
     @PostMapping("list")
     @ResponseBody
-    private Result<List<Category>> getcategoryList(String categoryName, Integer page, Integer limit){
+    private Result<List<Category>> getCategoryList(String categoryName, Integer page, Integer limit){
         System.out.println(1);
         return categoryService.selectcategoryList(categoryName, page, limit);
     }
 
     @PostMapping("add")
     @ResponseBody
-    private ServerResponse addcategory(@RequestBody Map<String,Object> map){
+    private ServerResponse addCategory(@RequestBody Map<String,Object> map){
         categoryService.insertcategory((String)map.get("categoryName"));
         return ServerResponse.createBySuccess();
     }
 
     @PostMapping("delete")
     @ResponseBody
-    private ServerResponse deletecategory(@RequestBody Map<String,Object> map){
+    private ServerResponse deleteCategory(@RequestBody Map<String,Object> map){
         categoryService.deletecategory((Integer)map.get("categoryId"));
         return ServerResponse.createBySuccess();
     }
 
     @PostMapping("update")
     @ResponseBody
-    private ServerResponse updatecategory(@RequestBody Map<String,Object> map){
+    private ServerResponse updateCategory(@RequestBody Map<String,Object> map){
         Category category = new Category();
         try {
             int categoryId = (Integer)map.get("categoryId");
@@ -57,5 +57,12 @@ public class CategoryController {
         }
         categoryService.updatecategory(category);
         return ServerResponse.createBySuccess();
+    }
+
+    @PostMapping("listAll")
+    @ResponseBody
+    private List<Category> getCategoryListAll(){
+        System.out.println(1);
+        return categoryService.selectCategoryListAll();
     }
 }

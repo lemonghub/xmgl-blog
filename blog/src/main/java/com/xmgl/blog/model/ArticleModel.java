@@ -1,8 +1,14 @@
-package com.xmgl.blog.entity;
+package com.xmgl.blog.model;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class Article {
+/**
+ * @author 郭秦平
+ * @data: 2019/04/15
+ **/
+public class ArticleModel {
     private Integer articleId;
 
     private String title;
@@ -17,11 +23,22 @@ public class Article {
 
     private Integer postStatus;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createAt;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateAt;
 
     private String content;
+
+    private String categoryName;
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     public Integer getArticleId() {
         return articleId;

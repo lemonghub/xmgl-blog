@@ -25,4 +25,6 @@ public interface CategoryMapper {
     List<Category> selectCategoryByPager(@Param("categoryName") String categoryName, @Param("start") int start, @Param("limit") int limit);
 
     int selectCategoryListCount(@Param("categoryName") String categoryName);
+
+    List<Category> selectCategoryList();
 }

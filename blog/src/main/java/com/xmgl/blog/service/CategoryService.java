@@ -41,4 +41,6 @@ public interface CategoryService {
      * @return
      */
     ServerResponse updatecategory(Category category);
+
+    List<Category> selectCategoryListAll();
 }

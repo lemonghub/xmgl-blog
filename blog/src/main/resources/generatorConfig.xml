@@ -23,7 +23,7 @@
     
     <javaClientGenerator targetPackage="com.xmgl.blog.dao" targetProject="src/main/java" type="XMLMAPPER" />
 
-      <table tableName="tb_comment_reply" domainObjectName="CommentReply"
+      <table tableName="tb_article" domainObjectName="Article"
              enableCountByExample="false" enableUpdateByExample="false"
              enableDeleteByExample="false" enableSelectByExample="false"
              selectByExampleQueryId="false">
