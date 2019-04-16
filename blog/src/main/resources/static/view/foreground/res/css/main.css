@@ -207,45 +207,198 @@ body{font: 14px 宋体 Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-se
   .album-content .img-info{margin-top: 0px; margin-bottom: 50px;}
   .album-content .img-list .space>*{padding:30px;}
 }
-@media screen and (max-width: 768px){
-  .header .nav,.header .welcome-text{display: none;}
-  .banner .amount{line-height: 40px; }
-  .banner .title{top: 245px;}
-  .banner .title h3{font-size: 40px; line-height: 44px;}
-  .banner .title h4{font-size: 24px;}
-  .footer{padding-left: 0;}
-  .footer .qrcode{float: none; margin-bottom: 40px; margin-left: 10px;}
-  .footer .practice-mode{position: relative; margin-left: 10px;}
-  .banner .title{top: 290px; left: 20px;}
-  .banner .amount{left: 20px; top: 210px; line-height: 30px;}
-  .whisper-content .cont .item{padding:30px;}
-  .whisper-content .cont .item-box .item{padding:30px;}
-  .content .review-version .list-cont .cont .text{padding-left:0; line-height: 22px; color: #333; } 
-  .content .review-version .list-cont .cont .text .tit{line-height: 50px; margin-bottom: 0;}
-  .content .review-version .list-cont .cont .text .tit .name{margin-left: 20px;}
-  .content .review-version .list-cont .cont .text .ct{margin-top: 20px;}
-  .leacots-content .review-version .form{margin:40px 0;}
-  .album-content .img-list .space>*{padding:10px;}
-  .album-content .img-list .layui-laypage{margin: 50px 0 0 0;}
-  .album-content .img-list #demo{text-align: center;}
-  .about-content .item.info img{margin-right: 0; float: none; height: auto; width: 100%;}
-  .about-content .item.info p{padding-left:20px;}
-  .about-content .item{padding-bottom: 40px;}
-  .about-content .item h3{padding-left: 20px;}
-  .about-content .item.contact .cont img{margin:0 30px 0 20px;}
-  /*menu-btn*/
-  .menu { width: 50px; height: 40px; position: relative; cursor: pointer;}
-  .menu:before, .menu:after { content: ""; display: block; width: 50px; height: 6px; background: #ff7f21; border-radius: 8px; position: absolute; left: 0; -webkit-transition: all 0.15s ease-in-out; transition: all 0.15s ease-in-out; }
-  .menu:before { top: 0px; box-shadow: 0 34px #ff7f21;}
-  .menu:after { bottom: 17px; }
-  .menu.on:before { top: 17px; box-shadow: none; -webkit-transform: rotate(225deg); transform: rotate(225deg); }
-  .menu.on:after { bottom: 17px; -webkit-transform: rotate(135deg); transform: rotate(135deg); }
-  .menu-btn{position: absolute; top: 40px; right: 20px;}
-  .header .header-down-nav { width: 100%; position: absolute; top: 120px; z-index: 2; left: 0; padding: 0; border-radius: 0;}
-  .header .header-down-nav {background: #ff7f21;}
-  .header .header-down-nav .layui-nav-item a{padding:0 40px;}
-  .header .header-down-nav li {display: block;}
-  .header .header-down-nav li a{font-size: 16px;}
-@media screen and (max-width: 320px){
-  .whisper-content .cont .item img{width: 100%;}
+@media screen and (max-width: 768px) {
+    .header .nav, .header .welcome-text {
+        display: none;
+    }
+
+    .banner .amount {
+        line-height: 40px;
+    }
+
+    .banner .title {
+        top: 245px;
+    }
+
+    .banner .title h3 {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .banner .title h4 {
+        font-size: 24px;
+    }
+
+    .footer {
+        padding-left: 0;
+    }
+
+    .footer .qrcode {
+        float: none;
+        margin-bottom: 40px;
+        margin-left: 10px;
+    }
+
+    .footer .practice-mode {
+        position: relative;
+        margin-left: 10px;
+    }
+
+    .banner .title {
+        top: 290px;
+        left: 20px;
+    }
+
+    .banner .amount {
+        left: 20px;
+        top: 210px;
+        line-height: 30px;
+    }
+
+    .whisper-content .cont .item {
+        padding: 30px;
+    }
+
+    .whisper-content .cont .item-box .item {
+        padding: 30px;
+    }
+
+    .content .review-version .list-cont .cont .text {
+        padding-left: 0;
+        line-height: 22px;
+        color: #333;
+    }
+
+    .content .review-version .list-cont .cont .text .tit {
+        line-height: 50px;
+        margin-bottom: 0;
+    }
+
+    .content .review-version .list-cont .cont .text .tit .name {
+        margin-left: 20px;
+    }
+
+    .content .review-version .list-cont .cont .text .ct {
+        margin-top: 20px;
+    }
+
+    .leacots-content .review-version .form {
+        margin: 40px 0;
+    }
+
+    .album-content .img-list .space > * {
+        padding: 10px;
+    }
+
+    .album-content .img-list .layui-laypage {
+        margin: 50px 0 0 0;
+    }
+
+    .album-content .img-list #demo {
+        text-align: center;
+    }
+
+    .about-content .item.info img {
+        margin-right: 0;
+        float: none;
+        height: auto;
+        width: 100%;
+    }
+
+    .about-content .item.info p {
+        padding-left: 20px;
+    }
+
+    .about-content .item {
+        padding-bottom: 40px;
+    }
+
+    .about-content .item h3 {
+        padding-left: 20px;
+    }
+
+    .about-content .item.contact .cont img {
+        margin: 0 30px 0 20px;
+    }
+
+    /*menu-btn*/
+    .menu {
+        width: 50px;
+        height: 40px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .menu:before, .menu:after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 6px;
+        background: #ff7f21;
+        border-radius: 8px;
+        position: absolute;
+        left: 0;
+        -webkit-transition: all 0.15s ease-in-out;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .menu:before {
+        top: 0px;
+        box-shadow: 0 34px #ff7f21;
+    }
+
+    .menu:after {
+        bottom: 17px;
+    }
+
+    .menu.on:before {
+        top: 17px;
+        box-shadow: none;
+        -webkit-transform: rotate(225deg);
+        transform: rotate(225deg);
+    }
+
+    .menu.on:after {
+        bottom: 17px;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+
+    .menu-btn {
+        position: absolute;
+        top: 40px;
+        right: 20px;
+    }
+
+    .header .header-down-nav {
+        width: 100%;
+        position: absolute;
+        top: 120px;
+        z-index: 2;
+        left: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .header .header-down-nav {
+        background: #ff7f21;
+    }
+
+    .header .header-down-nav .layui-nav-item a {
+        padding: 0 40px;
+    }
+
+    .header .header-down-nav li {
+        display: block;
+    }
+
+    .header .header-down-nav li a {
+        font-size: 16px;
+    }
+
+    @media screen and (max-width: 320px) {
+        .whisper-content .cont .item img {
+            width: 100%;
+        }
+    }
 }
