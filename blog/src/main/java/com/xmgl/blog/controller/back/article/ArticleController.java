@@ -108,4 +108,18 @@ public class ArticleController {
         }
         return ServerResponse.createBySuccess();
     }
+
+    @PostMapping("isTop")
+    @ResponseBody
+    private ServerResponse editArticleTop(@RequestBody Map<String,Object> map){
+        try{
+            String json = ObjectMapperUtil.objectToString(map.get("article"));
+            Article article = ObjectMapperUtil.convertObj(json,Article.class);
+            articleService.updateArticleTop(article);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ServerResponse.createByFailure(e.getMessage());
+        }
+        return ServerResponse.createBySuccess();
+    }
 }

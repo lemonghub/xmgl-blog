@@ -64,4 +64,11 @@ public interface ArticleService {
      * @return
      */
     List<ArticleTag> selectTagByArticleId(int articleId);
+
+    /**
+     * 是否置顶文章
+     * @param article
+     * @return
+     */
+    ServerResponse updateArticleTop(Article article);
 }

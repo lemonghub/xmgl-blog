@@ -86,4 +86,10 @@ public class ArticleServiceImpl implements ArticleService {
     public List<ArticleTag> selectTagByArticleId(int articleId) {
         return articleTagMapper.selectByArticleId(articleId);
     }
+
+    @Override
+    public ServerResponse updateArticleTop(Article article) {
+        articleMapper.updateByPrimaryKeySelective(article);
+        return ServerResponse.createBySuccess();
+    }
 }
