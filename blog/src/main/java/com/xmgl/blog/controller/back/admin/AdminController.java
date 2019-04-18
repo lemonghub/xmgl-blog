@@ -23,8 +23,8 @@ public class AdminController {
 
     @PostMapping("login")
     @ResponseBody
-    public ServerResponse login(@RequestBody Map<String,String> map, HttpServletRequest request){
-        String adminStr = map.get("admin");
+    public ServerResponse login(@RequestBody Map<String,Object> map, HttpServletRequest request){
+        String adminStr = ObjectMapperUtil.objectToString(map.get("admin"));
         Admin admin = null;
         try{
             admin = ObjectMapperUtil.convertObj(adminStr, Admin.class);
@@ -36,6 +36,14 @@ public class AdminController {
             return ServerResponse.createByFailure("用户名或密码错误");
         }
         request.getSession().setAttribute("adminName", admin.getAdminName());
+        return ServerResponse.createBySuccess();
+    }
+
+    @PostMapping("loginOut")
+    @ResponseBody
+    public ServerResponse loginOut(@RequestBody Map<String,Object> map, HttpServletRequest request){
+        System.out.println(111);
+        request.getSession().removeAttribute("adminName");
         return ServerResponse.createBySuccess();
     }
 }
