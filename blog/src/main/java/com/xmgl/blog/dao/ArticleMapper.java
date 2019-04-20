@@ -24,7 +24,7 @@ public interface ArticleMapper {
 
     int updateByPrimaryKey(Article record);
 
-    List<ArticleModel> selectArticleByPager(@Param("title") String title, @Param("start") int start, @Param("limit") int limit);
+    List<ArticleModel> selectArticleByPager(@Param("title") String title,@Param("categoryId") Integer categoryId, @Param("start") int start, @Param("limit") int limit);
 
     int selectArticleListCount(@Param("title") String title);
 

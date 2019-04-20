@@ -36,8 +36,8 @@ public class ArticleController {
 
     @PostMapping("list")
     @ResponseBody
-    private Result<List<ArticleModel>> getArticleList(String title, Integer page, Integer limit){
-        return articleService.selectArticleList(title, page, limit);
+    private Result<List<ArticleModel>> getArticleList(String title,Integer categoryId, Integer page, Integer limit){
+        return articleService.selectArticleList(title,categoryId, page, limit);
     }
 
     @PostMapping("delete")

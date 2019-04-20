@@ -28,11 +28,11 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleTagMapper articleTagMapper;
 
     @Override
-    public Result<List<ArticleModel>> selectArticleList(String title, int page, int limit) {
+    public Result<List<ArticleModel>> selectArticleList(String title, Integer categoryId,int page, int limit) {
         page = PageCalculator.checkPage(page);
         limit = PageCalculator.checkLimit(limit);
         int start = PageCalculator.calculateStart(page, limit);
-        List<ArticleModel> customers = articleMapper.selectArticleByPager(title, start, limit);
+        List<ArticleModel> customers = articleMapper.selectArticleByPager(title,categoryId, start, limit);
         int count = articleMapper.selectArticleListCount(title);
         return Result.createSuccessResult(count, customers);
     }

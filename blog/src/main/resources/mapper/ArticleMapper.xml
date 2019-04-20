@@ -37,6 +37,9 @@
       <if test="title != null">
         AND title LIKE '%${title}%'
       </if>
+      <if test="categoryId != null">
+        AND a.category_id LIKE '%${categoryId}%'
+      </if>
     </where>
     ORDER By a.article_id
     LIMIT #{start}, #{limit}

@@ -21,7 +21,7 @@ public interface ArticleService {
      * @param limit
      * @return
      */
-    Result<List<ArticleModel>> selectArticleList(String title, int page, int limit);
+    Result<List<ArticleModel>> selectArticleList(String title, Integer categoryId,int page, int limit);
 
     /**
      * 删除文章
