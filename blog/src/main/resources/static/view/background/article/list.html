@@ -116,10 +116,11 @@
           ,method: 'post'
           ,cols: [[
               {type:'checkbox', fixed: 'left'}
-              ,{field:'articleId', title: '文章ID', sort: true}
+              ,{field:'articleId', title: '文章ID', sort: true,width:100}
               ,{field:'title', title: '文章名'}
               ,{field:'categoryName', title: '文章类别'}
               ,{field:'createAt', title: '创建时间',sort: true}
+              ,{field:'clickNum', title: '点击量',sort: true ,width:100,align:'center'}
               ,{field:'postStatus', title: '发布状态' ,width:178, align:'center', fixed: 'right', templet: '#buttonTpl',unresize: true}
               ,{field:'isTopping', title: '是否置顶' ,width:178, align:'center', fixed: 'right', templet: '#buttonTop',unresize: true}
               ,{width:178, align:'center', fixed: 'right', toolbar: '#table-content-list'}
