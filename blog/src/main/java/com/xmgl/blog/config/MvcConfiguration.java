@@ -26,7 +26,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(baseInterceptor).addPathPatterns("/**");
+//        registry.addInterceptor(baseInterceptor).addPathPatterns("/**");
 //        registry.addInterceptor(new SessionInterceptor()).excludePathPatterns("/blog/view/background/layuiadmin/").addPathPatterns("/**");
 //        registry.addInterceptor(baseInterceptor).excludePathPatterns("/static/view/background/layuiadmin/**").addPathPatterns("/**");
 
