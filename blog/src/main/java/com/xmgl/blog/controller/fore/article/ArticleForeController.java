@@ -1,7 +1,7 @@
-package com.xmgl.blog.controller.fore.category;
+package com.xmgl.blog.controller.fore.article;
 
-import com.xmgl.blog.entity.Category;
-import com.xmgl.blog.service.CategoryService;
+import com.xmgl.blog.entity.Article;
+import com.xmgl.blog.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -14,30 +14,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by linbin
- * on 2019/4/21 22:37
+ * on 2019/4/24 21:33
  */
 @RestController
-@RequestMapping("category")
-public class CategoryForeController {
+@RequestMapping("forearticle")
+public class ArticleForeController {
     private Logger logger = LoggerFactory.getLogger(getClass());
-    private Marker marker = MarkerFactory.getMarker("category");
+    private Marker marker = MarkerFactory.getMarker("foreArticle");
 
     @Autowired
-    private CategoryService categoryService;
+    private ArticleService articleService;
 
-    @PostMapping("allcategory")
+    @PostMapping("allArticle")
     @ResponseBody
-    private List<Category> getCategoryAll(){
-        List<Category> list = new ArrayList<>();
-        list = categoryService.selectCategoryListAll();
+    private List<Article> getArticleAll(){
+        List<Article> list = new ArrayList<>();
+        list = articleService.selectAllArticle();
         if (list != null){
             logger.info(marker,
                     "{} | {}",
-                    "category search information",
-                    "category success");
+                    "article search information",
+                    "article success");
         }
         return list;
     }
+
 }

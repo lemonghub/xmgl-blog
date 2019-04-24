@@ -45,6 +45,12 @@ public interface ArticleService {
     Article selectArticleById(Integer articleId);
 
     /**
+     * 查找全部文章
+     * @return
+     */
+    List<Article> selectAllArticle();
+
+    /**
      * 更新文章
      * @param article
      * @return

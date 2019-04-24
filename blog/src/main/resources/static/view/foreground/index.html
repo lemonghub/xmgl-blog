@@ -54,17 +54,15 @@
       <!--</div>-->
     </div>
   </div>
-  <!--<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>-->
+  <div id="target">
+  </div>
+  <script src="res/js/jquery-3.4.0.js"></script>
+  <script src="res/js/ractive.js"></script>
+  <script id="template" type="text/ractive">
   <div class="content">
     <div class="cont w1000">
-      <!--<div class="title">-->
-        <!--<span class="layui-breadcrumb" lay-separator="|">-->
-          <!--<a href="javascript:;" class="active">设计文章</a>-->
-          <!--<a href="javascript:;">前端文章</a>-->
-          <!--<a href="javascript:;">旅游杂记</a>-->
-        <!--</span>-->
-      <!--</div>-->
       <div class="list-item">
+      {{#item}}
         <div class="item">
           <div class="layui-fluid">
             <div class="layui-row">
@@ -73,88 +71,21 @@
               </div>
               <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
                 <div class="item-cont">
-                  <h3>先有鸡还是先有蛋<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
+                  <h3>{{title}}<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
                   <h5>没脑子</h5>
-                  <p>先有鸡还是先有蛋这个因果困境想要表达的是一个“到底是先有鸡，还是先有蛋”的问题。这个鸡与蛋的问题也常常激起古代的哲学家们去探索并讨论生命与宇宙的起源问题。</p>
+                  <p>{{introduction}}</p>
                   <a href="details.html" class="go-icon"></a>
                 </div>
             </div>
             </div>
            </div>
         </div>
-        <div class="item">
-          <div class="layui-fluid">
-            <div class="layui-row">
-              <div class="layui-col-xs12 layui-col-sm4 layui-col-md5">
-                <div class="img"><img src="res/img/sy_img2.jpg" alt=""></div>
-              </div>
-              <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
-                <div class="item-cont">
-                  <h3>空腹可以吃饭吗？<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
-                  <h5>沙雕问题</h5>
-                  <p>经验证空腹确实可以吃饭</p>
-                  <a href="details.html" class="go-icon"></a>
-                </div>
-            </div>
-            </div>
-           </div>
-        </div>
-        <div class="item">
-          <div class="layui-fluid">
-            <div class="layui-row">
-              <div class="layui-col-xs12 layui-col-sm4 layui-col-md5">
-                <div class="img"><img src="res/img/sy_img3.jpg" alt=""></div>
-              </div>
-              <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
-                <div class="item-cont">
-                <h3>被门挤过的核桃能补脑吗？<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
-                <h5>撒币马</h5>
-                <p>被门挤过的核桃当然不能补脑了，不信你去被门挤一下试试</p>
-                <a href="details.html" class="go-icon"></a>
-              </div>
-            </div>
-            </div>
-           </div>
-        </div>
-        <div class="item">
-          <div class="layui-fluid">
-            <div class="layui-row">
-              <div class="layui-col-xs12 layui-col-sm4 layui-col-md5">
-                <div class="img"><img src="res/img/sy_img4.jpg" alt=""></div>
-              </div>
-              <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
-                <div class="item-cont">
-                  <h3>吸烟有害健康<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
-                  <h5>沙雕问题</h5>
-                  <p>专家指出每吸60秒烟就会减少一分钟的寿命，所以千万要少吸烟。</p>
-                  <a href="details.html" class="go-icon"></a>
-                </div>
-            </div>
-            </div>
-           </div>
-        </div>
-        <div class="item">
-          <div class="layui-fluid">
-            <div class="layui-row">
-              <div class="layui-col-xs12 layui-col-sm4 layui-col-md5">
-                <div class="img"><img src="res/img/sy_img5.jpg" alt=""></div>
-              </div>
-              <div class="layui-col-xs12 layui-col-sm8 layui-col-md7">
-                <div class="item-cont">
-                  <h3>超人为什么要穿紧身衣<button class="layui-btn layui-btn-danger new-icon">new</button></h3>
-                  <h5>沙雕问题</h5>
-                  <p>因为超人救人要紧</p>
-                  <a href="details.html" class="go-icon"></a>
-                </div>
-            </div>
-            </div>
-           </div>
-        </div>
+      {{/item}}
       </div>
       <div id="demo" style="text-align: center;"></div>
     </div>
   </div>
-
+</script>
   <div class="footer-wrap">
     <div class="footer w1000">
       <h2 class="title">没脑子博客</h2>
@@ -182,6 +113,36 @@
       });
       menu.init();
     })
+  </script>
+  <script>
+      $(document).ready(function () {
+          getArticles();
+      });
+
+      function getArticles() {
+          console.log(111);
+          $.ajax({
+              type: 'post',
+              url: '/blog/forearticle/allArticle',
+              data: JSON.stringify({
+                  // "userId": userId
+              }),
+              dataType: 'json',
+              contentType: 'application/json;charset=utf-8',
+              success: function (msg) {
+                  console.info(msg)
+                  var ractive = new Ractive({
+                      target: '#target',
+                      template: '#template',
+                      data: {"item":msg}
+                  });
+
+              },
+              error:function (msg) {
+                  console.log(111)
+              }
+          })
+      }
   </script>
 </body>
 </html>

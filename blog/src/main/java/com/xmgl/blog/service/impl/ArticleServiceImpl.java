@@ -12,6 +12,7 @@ import com.xmgl.blog.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +36,13 @@ public class ArticleServiceImpl implements ArticleService {
         List<ArticleModel> customers = articleMapper.selectArticleByPager(title,categoryId, start, limit);
         int count = articleMapper.selectArticleListCount(title);
         return Result.createSuccessResult(count, customers);
+    }
+
+    @Override
+    public List<Article> selectAllArticle() {
+        List<Article> list = new ArrayList<>();
+        list = articleMapper.selectAllArticle();
+        return list;
     }
 
     @Override
