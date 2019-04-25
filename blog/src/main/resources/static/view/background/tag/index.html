@@ -35,6 +35,7 @@
           <script type="text/html" id="test-table-operate-barDemo" >
             <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+            <button type="button" class="layui-btn layui-btn-xs" id="test-upload-normal">上传图片</button>
           </script>
         </div>
       </div>
@@ -60,7 +61,7 @@
                 // {type:'checkbox', fixed: 'left'},
                 {field:'tagId', title: '标签ID', sort: true}
                 ,{field:'tagName', title: '标签名'}
-                ,{width:178, align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
+                ,{width:300, align:'center', fixed: 'right', toolbar: '#test-table-operate-barDemo'}
             ]]
             ,page: true
         });
